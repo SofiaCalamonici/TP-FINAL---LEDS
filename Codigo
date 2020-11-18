@@ -1,31 +1,27 @@
-print("Bienvenido al programa..") 
-persona={"Nombre":"","Apellido":"","Edad":0,"Peso":0,"Altura":0,"Direccion":"","Telefono":""}
-def cat_imc():
-    "Obtencion de categoria de IMC"           //compara el IMC para saber en que categoría esta
-    while imc < 18.5:                     
-        cat = "Bajo peso"
-        return cat
-    while 18.5 < imc < 24.9:
-        cat = "Peso normal"
-        return cat
-    while 25.0 < imc < 29.9:
-        cat = "Sobre Peso"
-        return cat
-    while 30.0 < imc < 34.9:
-        cat = "Obesidad tipo I"
-        return cat
-    while 35.0 < imc < 39.9:
-        cat = "Obesidad tipo II"
-        return cat
-    while imc > 40:
-        cat = "Obesidad tipo III"
-        return cat
-def imprimir():
-    print("Informacion personal Nombre y Apellido: " + persona["Nombre"].upper() + " " + persona["Apellido"].upper() + "\nCategoria de IMC: " + cat_imc().upper() + " / Peso " + persona["Peso"] + " Kg / Altura: "+ persona["Altura"] + " metros\nEdad: " + persona["Edad"] + " años" "\nDireccion en: " + persona["Direccion"].upper() + " / Telefono: " + persona["Telefono"] ) // muestra en pantalla la información personal
-for p in persona:
-    persona[p] = input(f"ingrese su {p} : ") 
-imc=round(float(persona["Peso"])/(float(persona["Altura"])**2),2) // calcula el IMC 
-persona["IMC"]=imc
+import RPi.GPIO as GPIO
+from gpiozero import LEDBoard, Button
 
-cat_imc()
-imprimir()
+leds = LEDBoards(5, 7, 11, 13)
+
+def num(i):
+    switcher = {
+        0: led.off(),
+        1: led.on(3),
+        2: led.on(2),
+        3: led.on(2, 3),
+        4: led.on(1),
+        5: led.on(1, 3),
+        6: led.on(1, 2),
+        7: led.on(1, 2, 3),
+        8: led.on(0),
+        9: led.on(0, 3)
+    }
+
+button(3)
+
+led.off()
+while true:
+    for i in range(10):
+        button.wait_for_press()
+        led.off()
+        num(i)
